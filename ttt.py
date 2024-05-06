@@ -10,19 +10,24 @@ print(zaidimas[0])
 print("Pradedame!")
 
 # 4. Nustatau tuščią lentą, su kuria dirbsiu toliau programuojant (kintamasis),
-ttt_lenta = ["| | | |\n| | | |\n| | | |"]
+ttt_lenta = [
+    [" ", " ", " "],
+    [" ", " ", " "],
+    [" ", " ", " "],
+    ]
 # print(ttt_lenta[0])
 
 # 5. F-ja lentos pateikimui
 def pateikti_lenta():
-    print(ttt_lenta[0])
+    for eilute in ttt_lenta:
+        print(" ".join(eilute))
 
-# # 6. F-ja, reikalinga tinkamų įrašų į lentą atlikimui, programai nurodant taškų koordinates
+# 6. F-ja, reikalinga tinkamų įrašų į lentą atlikimui, programai nurodant taškų koordinates
 def atnaujinti_lenta(pazymima_vieta, zaidejo_simbolis):
     pazymimos_vietos = {
-        "1": (1, 1), "2": (1, 2), "3": (1, 3),
-        "4": (2, 1), "5": (2, 2), "6": (2, 3),
-        "7": (3, 1), "8": (3, 2), "9": (3, 3)
+        "1": (0, 0), "2": (0, 1), "3": (0, 2),
+        "4": (1, 0), "5": (1, 1), "6": (1, 2),
+        "7": (2, 0), "8": (2, 1), "9": (2, 2)
     }
 # Tikrinsime žaidėjo įvesto langelio nr. tinkamumą:
     if pazymima_vieta in pazymimos_vietos.keys():
@@ -33,12 +38,9 @@ def atnaujinti_lenta(pazymima_vieta, zaidejo_simbolis):
         else:
             print("Langelis užimtas, pasirinkite laisvą langelį")
             return False
-
     else:
         print("Įvestas netinkamas langelio numeris, turite įvesti laisvą langelį (1 - 9)")
         return False
-
-    return True
 
 # Tikriname laimėtoją (x ir y asiu atzvilgiu, istrizainiu atzvilgiu):
 
@@ -60,7 +62,9 @@ def patikrinti_laimetoja():
 
     return None
 
-#  Žaidėjai įrašo skaičių, pagal kurio koordinate X arba O nukeliauja į lentą.
+#  Žaidėjai įrašo skaičių, pagal kurio koordinate X arba O nukeliauja į lentą. Pradedame nuo X žaidėjo.
+pirmas_zaidejas = "X"
+
 while True:
     pateikti_lenta()
     a = input("X žaidėjas - pasirinkite nepažymėto langelio Nr. (1-9): ")
@@ -70,11 +74,10 @@ while True:
         if laimetojas:
             print(f"Laimėjo {laimetojas}!")
             break
-        else:
-            continue
     else:
         print("Įvedėte neteisingą simbolį arba langelis jau pažymėtas")
 
+    pateikti_lenta()
     b = input("O žaidėjas - pasirinkite nepažymėto langelio Nr. (1-9): ")
     if b in "123456789":
         atnaujinti_lenta(b, "O")
@@ -82,8 +85,6 @@ while True:
         if laimetojas:
             print(f"Laimėjo {laimetojas}!")
             break
-        else:
-            continue
     else:
         print("Įvedėte neteisingą simbolį arba langelis jau pažymėtas")
 
