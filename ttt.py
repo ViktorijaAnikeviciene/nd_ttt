@@ -15,10 +15,12 @@ ttt_lenta = [
     [" ", " ", " "],
 ]
 
+
 # 5. F-ja lentos pateikimui (lenta būtų su šoniniais rėmais, kad žaidėjui būtų lengviau susigaudyti)
 def pateikti_lenta():
     for eilute in ttt_lenta:
         print("|" + "|".join(eilute) + "|")
+
 
 # 6. F-ja, reikalinga tinkamų įrašų į lentą atlikimui, programai nurodant taškų koordinates
 def atnaujinti_lenta(pazymima_vieta, zaidejo_simbolis):
@@ -40,6 +42,7 @@ def atnaujinti_lenta(pazymima_vieta, zaidejo_simbolis):
         print("Įvestas netinkamas langelio numeris, turite įvesti laisvą langelį (1 - 9)")
         return False
 
+
 # 8. Tikriname laimėtoją (x ir y asiu atzvilgiu, istrizainiu atzvilgiu). Man tai buvo sunkiausia dalis, ieškojau pagalbos internete.
 def patikrinti_laimetoja():
     for eilute in ttt_lenta:
@@ -56,6 +59,8 @@ def patikrinti_laimetoja():
         return ttt_lenta[0][0]
     elif ttt_lenta[0][2] == ttt_lenta[1][1] == ttt_lenta[2][0] != " ":
         return ttt_lenta[0][2]
+    if all(all(langelis != " " for langelis in eilute) for eilute in ttt_lenta):
+        return "Lygiosios"
 
     return None
 
